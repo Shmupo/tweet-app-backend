@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    # need this to get settings from config server
+    import: "optional:configserver:http://localhost:9000"
+  cloud:
+    gateway:
+      routes:
+        - id: POST-SERVICE
+          uri: lb://POST-SERVICE
+          predicates:
+            - Path=/api/posts/**
+        - id: REPLY-SERVICE
+          uri: lb://REPLY-SERVICE
+          predicates:
+            - Path=/api/replies/**
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
