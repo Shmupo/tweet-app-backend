@@ -17,23 +17,24 @@ public class PostController {
     private PostService postService;
 
     @GetMapping
-    private ResponseEntity<List<Post>> getAllPosts() {
+    public ResponseEntity<List<Post>> getAllPosts() {
         List<Post> data = postService.getAllPosts();
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{postId}")
-    private ResponseEntity<Post> getPostById(@PathVariable("postId") Long id) {
+    public ResponseEntity<Post> getPostById(@PathVariable("postId") Long id) {
         Post data = postService.getPostById(id);
         return ResponseEntity.ok(data);
     }
 
     // all posts of a user
     @GetMapping("/user/{userId}")
-    private ResponseEntity<List<Post>> getAllUserPosts(@PathVariable("userId") Long userId) {
+    public ResponseEntity<List<Post>> getAllUserPosts(@PathVariable("userId") Long userId) {
         List<Post> data = postService.getAllPostsOfUser(userId);
         return ResponseEntity.ok(data);
     }
+
 
 //  This will be handled by reply-service
 //    @GetMapping("/{postId}/replies")
@@ -43,20 +44,20 @@ public class PostController {
 //    }
 
     @PostMapping
-    private ResponseEntity<Post> createPost(@Validated @RequestBody Post post) {
+    public ResponseEntity<Post> createPost(@Validated @RequestBody Post post) {
         Post data = postService.createPost(post);
         return new ResponseEntity<>(data, HttpStatus.CREATED);
     }
 
     @PutMapping("/{postId}")
-    private ResponseEntity<Post> getAllUserPosts(@PathVariable("postId") Long postId,
+    public ResponseEntity<Post> getAllUserPosts(@PathVariable("postId") Long postId,
                                                        @Validated @RequestBody Post post) {
         Post data = postService.updatePost(postId, post);
         return ResponseEntity.ok(data);
     }
 
     @DeleteMapping("/{postId}")
-    private HttpStatus deletePost(@PathVariable("postId") Long postId) {
+    public HttpStatus deletePost(@PathVariable("postId") Long postId) {
         postService.deletePost(postId);
         return HttpStatus.OK;
     }

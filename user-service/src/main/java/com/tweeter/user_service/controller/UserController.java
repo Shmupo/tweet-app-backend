@@ -22,9 +22,33 @@ public class UserController {
         return ResponseEntity.ok(data);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getAllUsers(@PathVariable("userId") Long userId) {
+    @GetMapping("/id/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable("userId") Long userId) {
         User data = userService.getUserById(userId);
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
+        User data = userService.getUserByUsername(username);
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
+        User data = userService.getUserByEmail(email);
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/username/{username}/exists")
+    public ResponseEntity<Boolean> userAlreadyExists(@PathVariable("username") String username) {
+        Boolean data = userService.usernameAlreadyExists(username);
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/email/{email}/exists")
+    public ResponseEntity<Boolean> emailAlreadyExists(@PathVariable("username") String email) {
+        Boolean data = userService.usernameAlreadyExists(email);
         return ResponseEntity.ok(data);
     }
 

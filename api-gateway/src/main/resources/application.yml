@@ -4,6 +4,8 @@ spring:
   config:
     # need this to get settings from config server
     import: "optional:configserver:http://localhost:9000"
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:

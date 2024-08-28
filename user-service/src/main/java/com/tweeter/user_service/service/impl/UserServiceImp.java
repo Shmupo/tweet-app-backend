@@ -30,6 +30,43 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new ResourceNotFoundException("user", "username", username);
+        }
+        return user;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new ResourceNotFoundException("user", "email", email);
+        }
+        return user;
+    }
+
+    @Override
+    public User getUserByUsernameOrEmail(String usernameOrEmail) {
+        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+        if (user == null) {
+            throw new ResourceNotFoundException("user", "usernameOrEmail", usernameOrEmail);
+        }
+        return user;
+    }
+
+    @Override
+    public Boolean usernameAlreadyExists(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean emailAlreadyExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
     public User createUser(User user) {
         return userRepository.save(user);
     }
