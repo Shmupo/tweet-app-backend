@@ -57,6 +57,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public String getUsernameById(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            throw new ResourceNotFoundException("user", "id", userId);
+        });
+        return user.getUsername();
+    }
+
+    @Override
     public Boolean usernameAlreadyExists(String username) {
         return userRepository.existsByUsername(username);
     }
@@ -64,6 +72,11 @@ public class UserServiceImp implements UserService {
     @Override
     public Boolean emailAlreadyExists(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Boolean usernameOrEmailAlreadyExists(String username, String email) {
+        return userRepository.existsByUsernameOrEmail(username, email);
     }
 
     @Override
