@@ -111,6 +111,9 @@ public class UserController {
     public ResponseEntity<Resource> getUserImage(@PathVariable("userId") Long id) {
         User foundUser = userService.getUserById(id);
         String imageFileName = foundUser.getImgName();
+        if (imageFileName == null) {
+            imageFileName = "default-profile.jpg";
+        }
         Resource imageResource = new ClassPathResource("static/images/" + imageFileName);
 
         if (!imageResource.exists()) {

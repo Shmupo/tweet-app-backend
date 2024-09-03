@@ -28,7 +28,7 @@ public class User {
     @NotNull(message = "Password cannot be null")
     private String password;
     // used to grab image
-    private String imgName = null;
+    private String imgName = "default-profile.jpg";
 
     @ManyToMany(
             fetch = FetchType.EAGER, // tries to get all connected records

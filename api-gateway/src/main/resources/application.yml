@@ -21,3 +21,7 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/api/users/**
+        - id: LIKE-SERVICE
+          uri: lb://LIKE-SERVICE
+          predicates:
+            - Path=/api/likes/**

@@ -81,6 +81,9 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User createUser(User user) {
+        if (user.getImgName() == null) {
+            user.setImgName("default-profile.jpg");
+        }
         return userRepository.save(user);
     }
 

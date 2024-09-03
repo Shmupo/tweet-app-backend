@@ -57,7 +57,6 @@ public class PostServiceImpl implements PostService {
         foundPost.setTitle(post.getTitle());
         foundPost.setContent(post.getContent());
         foundPost.setTag(post.getTag());
-        foundPost.setLikedByUserIds(post.getLikedByUserIds());
         return foundPost;
     }
 

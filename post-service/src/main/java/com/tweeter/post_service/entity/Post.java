@@ -38,7 +38,4 @@ public class Post {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
-
-    @NotNull
-    private Set<Long> likedByUserIds = new HashSet<>();
 }
