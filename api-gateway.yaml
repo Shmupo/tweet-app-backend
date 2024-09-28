@@ -1,0 +1,47 @@
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+  labels:
+    app: tweet-app
+spec:
+  selector:
+    app: tweet-app
+  ports:
+    - protocol: TCP
+      port: 9191
+      targetPort: 9191
+  type: NodePort
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  labels:
+    app: tweet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweet-app
+  template:  # The pod template under spec
+    metadata:
+      labels:
+        app: tweet-app
+    spec:
+      containers:
+        - name: api-gateway
+          image: shmupo/registry-service
+          ports:
+            - containerPort: 9191
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "native"
+            - name: SPRING_CLOUD_CONFIG_SERVER_EUREKA_CLIENT_ENABLED
+              value: "true"
+            - name: SPRING_CLOUD_EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://registry-service:8761/eureka/"
+            - name: SPRING_APPLICATION_CONFIG_IMPORT
+              value: "optional:configserver:http://config-server:9000"

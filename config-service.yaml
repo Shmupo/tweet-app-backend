@@ -1,0 +1,45 @@
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-server
+  labels:
+    app: tweet-app
+spec:
+  selector:
+    app: tweet-app   # This must match the label on the pods
+  ports:
+    - protocol: TCP
+      port: 9000         # The port exposed by the service
+      targetPort: 9000   # The containerPort where the Config Server runs
+  type: NodePort          # Use NodePort to expose the service externally, or LoadBalancer if you are on a cloud provider
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+  labels:
+    app: tweet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweet-app
+  template:
+    metadata:
+      labels:
+        app: tweet-app
+    spec:
+      containers:
+        - name: config-server
+          image: shmupo/config-service
+          ports:
+            - containerPort: 9000
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "native"
+            - name: SPRING_CLOUD_CONFIG_SERVER_EUREKA_CLIENT_ENABLED
+              value: "true"
+            - name: SPRING_CLOUD_EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://registry-service:8761/eureka/"

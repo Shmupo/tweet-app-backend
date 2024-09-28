@@ -1,0 +1,38 @@
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-service
+  labels:
+    app: tweet-app
+spec:
+  selector:
+    app: tweet-app  # This must match the label on the pods
+  ports:
+    - protocol: TCP
+      port: 8761       # The port exposed externally
+      targetPort: 8761  # The containerPort where Eureka runs in the pod
+  type: NodePort  # Use 'NodePort' for local access or 'LoadBalancer' for cloud environments
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry-service
+  labels:
+    app: tweet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweet-app   # This label must match the pod's labels below
+  template:
+    metadata:
+      labels:
+        app: tweet-app # Match the label with the selector's 'matchLabels'
+    spec:
+      containers:
+        - name: registry-service
+          image: shmupo/registry-service
+          ports:
+            - containerPort: 8761
