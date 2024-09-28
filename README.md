@@ -61,4 +61,30 @@ Only a few microservices need to be started in order that needs to be followed b
 
 Registry Service -> Config Server -> [Remaining Microservices in any order]
 
-## Demo
+## Demo Images
+
+1. View Posts While not Logged In
+![ViewPosts, Not Logged In](https://github.com/Shmupo/tweet-app-backend/blob/main/images/PostsNotLoggedIn.png)
+
+2. View Posts While Logged In
+![ViewPosts, Not Logged In](https://github.com/Shmupo/tweet-app-backend/blob/main/images/PostsLoggedIn.png)
+
+3. Logging In
+![Login Page](https://github.com/Shmupo/tweet-app-backend/blob/main/images/LoginPage.png)
+
+4. Logged In
+![Logged In Page](https://github.com/Shmupo/tweet-app-backend/blob/main/images/LoginSuccess.png)
+
+5. View Replies While Not Logged In
+![Login Page](https://github.com/Shmupo/tweet-app-backend/blob/main/images/ViewPostLoggedOut.png)
+
+6. View Replies While Logged In
+![Login Page](https://github.com/Shmupo/tweet-app-backend/blob/main/images/ViewPostLoggedIn.png)
+
+7. Edit Profile Page
+![Login Page](https://github.com/Shmupo/tweet-app-backend/blob/main/images/EditProfile.png)
+
+To See the Frontend Implementation, see
+[Tweet App Frontend](https://github.com/Shmupo/tweet-app-frontend)
+
+
