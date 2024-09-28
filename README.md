@@ -3,6 +3,8 @@ This is an example of a X/Twitter-like application comprising of several compone
 
 The app itself allows all users to view posts, but only user profiles that are logged in and authenticated users can create, reply, or like posts.
 
+The application was made using SPRING and MySQL.
+
 ## Components
 
 1. [API Gateway](/api-gateway) Spring Cloud API Gateway, serves as a reverse proxy, providing a single entry point between clients and the backend microservices.
