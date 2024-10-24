@@ -32,7 +32,12 @@ public class PostServiceImpl implements PostService {
                 orElseThrow(() -> new ResourceNotFoundException("post", "postId", + postId));
     }
 
-    // api call
+    @Override
+    public List<Post> getAllPostsByTag(String tag) {
+        return postRepository.findAllPostsByTag(tag);
+    }
+
+    // api call, not being used
     @Override
     public PostReplies getPostWithReplies(Long postId) {
         Post foundPost = postRepository.findById(postId).
