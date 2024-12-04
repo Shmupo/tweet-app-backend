@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/registry-service/pom.xml" />
         <option value="$PROJECT_DIR$/auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/like-service/pom.xml" />
+        <option value="$PROJECT_DIR$/hashtag_service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

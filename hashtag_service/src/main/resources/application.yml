@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: "optional:configserver:http://localhost:9000"
+  application:
+    name: HASHTAG-SERVICE
+  datasource:
+    url: jdbc:mysql://localhost:3306/tweetdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true

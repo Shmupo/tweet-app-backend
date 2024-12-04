@@ -2,8 +2,6 @@ package com.tweeter.post_service.service.impl;
 
 import com.tweeter.post_service.entity.Post;
 import com.tweeter.post_service.exception.ResourceNotFoundException;
-import com.tweeter.post_service.payload.PostReplies;
-import com.tweeter.post_service.payload.Reply;
 import com.tweeter.post_service.repository.PostRepository;
 import com.tweeter.post_service.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,23 +31,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getAllPostsByTag(String tag) {
-        return postRepository.findAllPostsByTag(tag);
-    }
-
-    // api call, not being used
-    @Override
-    public PostReplies getPostWithReplies(Long postId) {
-        Post foundPost = postRepository.findById(postId).
-                orElseThrow(() -> new ResourceNotFoundException("post", "postId", + postId));
-
-        Reply[] replyArray = restTemplate.getForObject("http://REPLY-SERVICE/api/posts/" + foundPost.getId() + "/replies", Reply[].class);
-        List<Reply> replies = replyArray != null ? Arrays.asList(replyArray) : new ArrayList<>();
-
-        return new PostReplies(foundPost, replies);
-    }
-
-    @Override
     public Post createPost(Post post) {
         return postRepository.save(post);
     }
@@ -61,7 +42,6 @@ public class PostServiceImpl implements PostService {
         foundPost.setUserId(post.getUserId());
         foundPost.setTitle(post.getTitle());
         foundPost.setContent(post.getContent());
-        foundPost.setTag(post.getTag());
         return foundPost;
     }
 

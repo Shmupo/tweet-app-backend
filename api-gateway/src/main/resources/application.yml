@@ -24,3 +24,7 @@ spring:
           uri: lb://LIKE-SERVICE
           predicates:
             - Path=/api/likes/**
+        - id: HASHTAG-SERVICE
+          uri: lb://HASHTAG-SERVICE
+          predicates:
+            - Path=/api/hashtag/**

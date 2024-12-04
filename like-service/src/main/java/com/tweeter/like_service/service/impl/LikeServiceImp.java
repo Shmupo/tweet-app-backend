@@ -2,9 +2,11 @@ package com.tweeter.like_service.service.impl;
 
 import com.tweeter.like_service.entity.Like;
 import com.tweeter.like_service.entity.LikeId;
+import com.tweeter.like_service.entity.PostLikeCount;
 import com.tweeter.like_service.exception.ResourceNotFoundException;
 import com.tweeter.like_service.repository.LikeRepository;
 import com.tweeter.like_service.service.LikeService;
+import com.tweeter.like_service.service.PostLikeCountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,18 @@ public class LikeServiceImp implements LikeService {
     @Autowired
     private LikeRepository likeRepository;
 
+    @Autowired
+    private PostLikeCountService postLikeService;
+
     @Override
-    public List<Like> getLikesByPostId(Long postId) {
-        return likeRepository.findAllLikesByLikeIdPostId(postId);
+    public Long getTotalLikesByPostId(Long postId) {
+        PostLikeCount foundPostlikeCount = postLikeService.getPostLikeCountByPostId(postId);
+
+        if (foundPostlikeCount != null) {
+            return foundPostlikeCount.getLikeCount();
+        } else {
+            return 0L;
+        }
     }
 
     @Override
@@ -45,6 +56,16 @@ public class LikeServiceImp implements LikeService {
 
         if (likeRepository.findById(likeId).isPresent()) {
             throw new IllegalStateException("Like already exists for userId: " + userId + " and postId: " + postId);
+        }
+
+        // create entry to track total post likes, or, if it exists, add to it
+        PostLikeCount postLikeCount = postLikeService.getPostLikeCountByPostId(postId);
+        if (postLikeCount == null) { // create new if not found
+            postLikeCount = new PostLikeCount(postId, 1L);
+            postLikeService.addPostLikeCount(postId);
+        } else { // update if found
+            postLikeCount.setLikeCount(postLikeCount.getLikeCount() + 1);
+            postLikeService.updatePostLikeCount(postId, postLikeCount);
         }
 
         Like newLike = new Like();

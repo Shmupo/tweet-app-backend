@@ -5,7 +5,7 @@ import com.tweeter.like_service.entity.Like;
 import java.util.List;
 
 public interface LikeService {
-    List<Like> getLikesByPostId(Long postId);
+    Long getTotalLikesByPostId(Long postId);
     List<Like> getLikesByUserId(Long userId);
     Like getLikeByUserIdAndPostId(Long userId, Long postId);
     Like createLike(Long userId, Long postId);

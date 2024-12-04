@@ -22,12 +22,6 @@ public class PostController {
         return ResponseEntity.ok(data);
     }
 
-    @GetMapping("tag/{tag}")
-    public ResponseEntity<List<Post>> getAllPostsByTag(@PathVariable("tag") String tag) {
-        List<Post> data = postService.getAllPostsByTag(tag);
-        return ResponseEntity.ok(data);
-    }
-
     @GetMapping("/{postId}")
     public ResponseEntity<Post> getPostById(@PathVariable("postId") Long id) {
         Post data = postService.getPostById(id);
@@ -40,14 +34,6 @@ public class PostController {
         List<Post> data = postService.getAllPostsOfUser(userId);
         return ResponseEntity.ok(data);
     }
-
-
-//  This will be handled by reply-service
-//    @GetMapping("/{postId}/replies")
-//    private ResponseEntity<PostReplies> getPostReplies(@PathVariable("postId") Long postId) {
-//        PostReplies data = postService.getPostWithReplies(postId);
-//        return ResponseEntity.ok(data);
-//    }
 
     @PostMapping
     public ResponseEntity<Post> createPost(@Validated @RequestBody Post post) {

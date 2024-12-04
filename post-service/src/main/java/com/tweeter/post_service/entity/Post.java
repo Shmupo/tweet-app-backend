@@ -32,9 +32,6 @@ public class Post {
     @Size(max = 144, min = 8, message = "Content must be between 8 and 144 characters.")
     private String content;
 
-    @Size(max = 50, message = "Tag cannot exceed 50 characters.")
-    private String tag = null;
-
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;

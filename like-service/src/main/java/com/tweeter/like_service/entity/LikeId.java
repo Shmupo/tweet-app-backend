@@ -10,7 +10,6 @@ import lombok.NonNull;
 import java.io.Serializable;
 import java.util.Objects;
 
-// composite key class
 @Data
 @Embeddable
 @AllArgsConstructor
@@ -24,17 +23,17 @@ public class LikeId implements Serializable {
     @Column(nullable = false)
     private Long postId;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LikeId likeId = (LikeId) o;
-        return Objects.equals(postId, likeId.postId) &&
-                Objects.equals(userId, likeId.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(postId, userId);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        LikeId likeId = (LikeId) o;
+//        return Objects.equals(postId, likeId.postId) &&
+//                Objects.equals(userId, likeId.userId);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(postId, userId);
+//    }
 }
