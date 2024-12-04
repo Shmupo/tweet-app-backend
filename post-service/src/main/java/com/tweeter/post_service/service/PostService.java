@@ -1,7 +1,6 @@
 package com.tweeter.post_service.service;
 
 import com.tweeter.post_service.entity.Post;
-import com.tweeter.post_service.payload.PostReplies;
 
 import java.util.List;
 
